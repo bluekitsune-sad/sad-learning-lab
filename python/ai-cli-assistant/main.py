@@ -35,12 +35,23 @@ payload = {
     "messages": [
         {
             "role": "user",
-            "content":  f"{user_input}\n\nhere is the formate for the result{response_formate}\n\nhere is the file content:\n{content}"
+            "content": f"""
+{user_input}
 
+Return the result as JSON matching this structure:
+{json.dumps(response_formate)}
+
+File content:
+{content}
+"""
         }
     ],
-    "temperature": 0.7
+    "temperature": 0.7,
+    "response_format": {
+        "type": "json_object"
+    }
 }
+
 
 # formated_payload = json.dumps(payload)
 
@@ -60,6 +71,12 @@ data = response.json()
 
 if response.ok:
     answer = data["choices"][0]["message"]["content"]
-    print("\nAI:", answer)
+
+    try:
+        result = json.loads(answer)
+        print(json.dumps(result, indent=4))
+    except json.JSONDecodeError:
+        print("Model did not return valid JSON:")
+        print(answer)
 else:
     print("Error:", data)
