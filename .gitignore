@@ -15,8 +15,6 @@ Dependencies
 node_modules/
 bower_components/
 
-Python
-
 .venv/
 venv/
 env/
@@ -118,14 +116,14 @@ React / Vite / CRA
 Testing
 ============================================
 
-coverage/
-.nyc_output/
-jest-coverage/
-playwright-report/
-test-results/
-blob-report/
-cypress/videos/
-cypress/screenshots/
+# coverage/
+# .nyc_output/
+# jest-coverage/
+# playwright-report/
+# test-results/
+# blob-report/
+# cypress/videos/
+# cypress/screenshots/
 
 ============================================
 Logs
