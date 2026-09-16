@@ -1,5 +1,25 @@
 import requests
+from ai_analyzer import analyzer
+from report import report
 
+
+def initializer(url):
+
+    scan_result = {
+        "target": "",
+        "status": "",
+        "headerResults": {},
+        "headersAnalysis": {},
+        "aiSummary": ""
+    }
+
+    print("initializing scanner")
+    scan_result["target"] = url
+
+    scan_result["status"], scan_result["headerResults"], scan_result["headersAnalysis"] = scan(scan_result["target"])
+    scan_result["aiSummary"] = analyzer(scan_result)
+    # report(scan_result)
+    return scan_result
 
 def scan(url):
     if not url.startswith(("http://", "https://")):
